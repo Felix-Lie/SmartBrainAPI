@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const cors = require('cors');
 
 const app = express();
 app.use(express.urlencoded({extended: false}));
@@ -26,6 +27,7 @@ const database = {
 
     ]
 }
+app.use(cors())
 
 app.get('/', (req, res) => {
     res.send(database.users);
