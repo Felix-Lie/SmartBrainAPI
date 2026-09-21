@@ -34,16 +34,9 @@ app.get('/', (req, res) => {
 })
 
 app.post('/signin', (req,res) => {
-    // Load hash from your password DB.
-    // bcrypt.compare('apples', '$2b$10$o1ah..0ZArhpiIpfXnPlBOP.GxVgHXcE8fial413REF1oiItJWWpq', function(err, res) {
-    //     console.log('first guess', res)
-    // });
-    // bcrypt.compare('banana', '$2b$10$o1ah..0ZArhpiIpfXnPlBOP.GxVgHXcE8fial413REF1oiItJWWpq', function(err, res) {
-    //     console.log('second guess', res)
-    // });
     if (req.body.email === database.users[0].email 
         && req.body.password === database.users[0].password){
-            res.json('success')
+            res.json(database.users[0]);
     } else {
         res.status(400).json('error logging in')
     }
@@ -81,7 +74,8 @@ app.get('/profile/:id', (req, res) => {
     }
 })
 
-app.post('/image', (req,res) => {
+app.put('/image', (req,res) => {
+    console.log('Image Body: ', req.body);
     const { id } = req.body;
     let found = false
     database.users.forEach(user => {
